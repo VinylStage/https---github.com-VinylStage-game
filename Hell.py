@@ -30,7 +30,7 @@ class Character:
         if random.random() < self.AGI:
             return
         damage = self.ATK + random.randint(-50, 100)  # 랜덤으로 치명타 적용
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{target.name} : 오소이')
@@ -40,8 +40,8 @@ class Character:
         print(f'{self.name}은(는) {self.VIT}만큼 체력을 회복했다.')
         if target.HP <= 0:
             print(f'{target.name}녀석 {damage}맞고 죽음')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             print('================================================================================================')
 
     # 소용돌이
@@ -50,7 +50,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.ATK*0.8
-        damage -= target.DEF
+        damage -= target.DEF*0.2
         if damage < 0:
             damage = 0
             print(f'{target.name} : 오소이')
@@ -60,8 +60,8 @@ class Character:
         print(f'{self.name}은(는) {self.VIT}만큼 체력을 회복했다.')
         if target.HP <= 0:
             print(f'{target.name}, 소용돌이로 가루가 되었다.')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             print('================================================================================================')
 
     # 머리찢기
@@ -69,7 +69,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.ATK*1.2
-        damage -= target.DEF
+        damage -= target.DEF*0.2
         if damage < 0:
             damage = 0
             print(f'{target.name} : 오소이')
@@ -79,8 +79,8 @@ class Character:
         print(f'{self.name}은(는) {self.VIT}만큼 체력을 회복했다.')
         if target.HP <= 0:
             print(f'{target.name}의 머리가 사라졌다!')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             print('================================================================================================')
 
     # 기합
@@ -94,8 +94,8 @@ class Character:
               f'{self.name}은(는) 방어력이 30 오르고 50 체력을 회복했다!', sep='\n')
         if target.DEF <= 0:
             print(f'{target.name}이(가) 겁에질려 그대로 쓰러졌다!')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             print('================================================================================================')
 
 # 성기사
@@ -105,7 +105,7 @@ class Character:
             return
         damage = self.ATK + self.FTH*0.2 + \
             random.randint(-20, 150)  # 랜덤으로 치명타 적용
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{target.name} : 오소이')
@@ -115,8 +115,8 @@ class Character:
         print(f'{self.name}은(는) {self.VIT}만큼 체력을 회복했다.')
         if target.HP <= 0:
             print(f'{target.name}이 성스러워졌다!')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             print('================================================================================================')
 
         # 신성한불꽃
@@ -137,8 +137,8 @@ class Character:
             print(f'{target.name}, 귀중한 단백질원이 되었다')
             self.BLF -= 10
             print(f'스킬사용으로 믿음이 10 소모 : {self.BLF}')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             print('================================================================================================')
 
         # 신성한 빛줄기
@@ -146,7 +146,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.FTH
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{target.name} : 오소이')
@@ -158,13 +158,13 @@ class Character:
         print(f'{self.name}은(는) {self.VIT}만큼 체력을 회복했다.')
         if target.HP <= 0:
             print(f'{target.name}아 제발 밖에좀 나가서', '\n', '햇빛도 좀 보고 잔디도 만지고 좀 그래!')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             print('================================================================================================')
 
         # 기도
     def pray(self, target):
-        effect = self.HP + self.FTH*0.3
+        effect = self.FTH*0.3
         self.HP += effect
         self.BLF += effect*0.5
         print(f'체력을 {effect}만큼 회복하고 믿음을 {effect*0.5}만큼 회복했다!')
@@ -179,7 +179,7 @@ class Character:
             return
         damage = self.ATK + self.INT*0.1 + \
             random.randint(-50, 20)  # 랜덤으로 치명타 적용
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{target.name} : 오소이')
@@ -192,8 +192,8 @@ class Character:
               f'현재마나 : {self.MP}', sep='\n')
         if target.HP <= 0:
             print('너는 뭘해도 죽을놈이구나')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             self.MP += self.REM*1.5
             print(f'{self.name}은(는) {self.REM*1.5}만큼 마나를 회복했다.',
                   f'현재마나 : {self.MP}', sep='\n')
@@ -204,7 +204,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.INT*0.6
-        damage -= target.REP  # 방어력으로 물리공격 상쇄
+        damage -= target.REP*0.2*0.2  # 방어력으로 물리공격 상쇄
         self.MP -= 20
         print('20마나 사용')
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
@@ -221,8 +221,8 @@ class Character:
             print(f'{target.name}, 맛있는 냄새가 솔솔 피어오른다.')
             self.MP -= 20
             print(f'20마나 사용 : {self.MP}')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             self.MP += self.REM
             print(f'{self.name}은(는) {self.REM*1.5}만큼 마나를 회복했다.',
                   f'현재마나 : {self.MP}', sep='\n')
@@ -233,7 +233,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.INT*0.5
-        damage -= target.REP  # 방어력으로 물리공격 상쇄
+        damage -= target.REP*0.2  # 방어력으로 물리공격 상쇄
         self.MP -= 25
         print('25마나 사용')
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
@@ -250,8 +250,8 @@ class Character:
             print(f'{target.name}, 선채로 사망..!')
             self.MP -= 25
             print(f'25마나 사용 : {self.MP}')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             self.MP += self.REM
             print(f'{self.name}은(는) {self.REM*1.5}만큼 마나를 회복했다.',
                   f'현재마나 : {self.MP}', sep='\n')
@@ -262,7 +262,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.INT*0.8
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2*0.2  # 방어력으로 물리공격 상쇄
         self.MP -= 30
         print('30마나 사용')
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
@@ -279,8 +279,8 @@ class Character:
             print(f'{target.name}, 생 매 장 ~')
             self.MP -= 30
             print(f'30마나 사용 : {self.MP}')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             self.MP += self.REM
             print(f'{self.name}은(는) {self.REM*1.5}만큼 마나를 회복했다.',
                   f'현재마나 : {self.MP}', sep='\n')
@@ -305,7 +305,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.ATK + random.randint(-50, 200)  # 랜덤으로 치명타 적용
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{target.name} : 오소이')
@@ -318,8 +318,8 @@ class Character:
               f'현재 기력: {self.ENG}', sep='\n')
         if target.HP <= 0:
             print(f'톡 쳤더니 죽어버린 {target.name} 코이츠 wwwww')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}', sep='\n')
@@ -330,7 +330,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.ATK*0.7
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         target.DEF = target.DEF - self.ATK*0.3
         self.ENG -= 50
         print('50 기력사용')
@@ -353,8 +353,8 @@ class Character:
             print('================================================================================================')
         elif target.HP <= 0:
             print(f'{target.name}, DOWN! {target.name}, DOWN!')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}', sep='\n')
@@ -365,7 +365,7 @@ class Character:
         if random.random() < target.AGI:
             return
         damage = self.ATK*1.2
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         self.ENG -= 30
         print('30 기력사용')
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
@@ -380,8 +380,8 @@ class Character:
               f'현재 기력: {self.ENG}', sep='\n')
         if target.HP <= 0:
             print(f'{target.name}이 대충 죽었다는 내용')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}', sep='\n')
@@ -390,7 +390,7 @@ class Character:
         # 엎어치기
     def overthrow(self, target):
         damage = self.ATK*1.8
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         self.ENG -= 60
         print('60 기력사용')
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
@@ -405,8 +405,8 @@ class Character:
               f'현재 기력: {self.ENG}', sep='\n')
         if target.HP <= 0:
             print(f'{target.name}녀석 바닥에 파묻힌채로 가버렸군')
-            self.HP += self.VIT*1.5
-            print(f'{self.name}은(는) {self.VIT*1.5}만큼 체력을 회복했다.')
+            self.HP += self.VIT*0.2
+            print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}', sep='\n')
@@ -439,7 +439,7 @@ class Monster:
         if random.random() < target.AGI:
             return
         damage = self.ATK + random.randint(-50, 70)  # 랜덤으로 치명타 적용
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{self.name} : 오소이')
@@ -455,7 +455,7 @@ class Monster:
         if random.random() < target.AGI:
             return
         damage = self.ATK
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         target.DEF -= 20
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
@@ -477,7 +477,7 @@ class Monster:
         if random.random() < target.AGI:
             return
         damage = self.ATK + random.randint(-50, 100)  # 랜덤으로 치명타 적용
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{self.name} : 오소이')
@@ -494,7 +494,7 @@ class Monster:
         if random.random() < target.AGI:
             return
         damage = self.ATK + 30
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{self.name} : 오소이')
@@ -513,7 +513,7 @@ class Monster:
         if random.random() < target.AGI:
             return
         damage = self.ATK + random.randint(50, 130)  # 랜덤으로 치명타 적용
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{self.name} : 오소이')
@@ -528,7 +528,7 @@ class Monster:
 
     def bugsattack(self, target):
         damage = self.INT*1.5
-        damage -= target.REP  # 마법저항력으로 물리공격 상쇄
+        damage -= target.REP*0.2  # 마법저항력으로 물리공격 상쇄
         target.HP -= damage
         target.REP -= self.INT*0.2
         self.HP -= self.INT*0.1
@@ -547,7 +547,7 @@ class Monster:
         if random.random() < target.AGI:
             return
         damage = self.ATK + random.randint(0, 80)  # 랜덤으로 치명타 적용
-        damage -= target.DEF  # 방어력으로 물리공격 상쇄
+        damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
             print(f'{self.name} : 오소이')
@@ -564,7 +564,7 @@ class Monster:
         if random.random() < target.AGI:
             return
         damage = self.INT*1.2
-        damage -= target.REP
+        damage -= target.REP*0.2
         target.REP -= self.INT*0.1
         if damage < 0:
             damage = 0
@@ -585,7 +585,7 @@ class Monster:
         if random.random() < target.AGI:
             return
         damage = self.ATK + random.randint(0, 80)
-        damage -= target.DEF
+        damage -= target.DEF*0.2
         if damage < 0:
             damage = 0
             print(f'{self.name} : 오소이')
@@ -600,7 +600,7 @@ class Monster:
 
     def spitting(self, target):
         damage = self.INT*1.2
-        damage -= target.REP
+        damage -= target.REP*0.2
         target.REP -= self.INT*0.1
         print(f'선악과뱀에게 침을 맞고 {damage}만큼 피해를 입고 마법저항력이 {self.INT*0.1} 떨어졌다!',
               f'현재 마법저항력 : {target.REP}', '\n')
@@ -614,8 +614,8 @@ class Monster:
         # 짓밟기
 
     def stompon(self, target):
-        damage = self.ATK*0.3 + self.INT*1.5
-        damage -= target.REP - target.DEF
+        damage = self.ATK*1.5 + self.INT*2.5
+        damage -= target.REP*0.2 - target.DEF*0.2
         print(f'성역의 어머니에게 밟혀 {damage}만큼 피해를 입었다. 포상이다!')
         if target.HP <= 0:
             print(f'성역의 어머니에게 밟혀 {damage} 피해를 입고 영웅은 성불했다!', '마망!', sep='\n')
@@ -624,8 +624,8 @@ class Monster:
 
         # 흡혈
     def lifeabsorption(self, target):
-        damage = self.INT*2
-        damage -= target.REP
+        damage = self.INT*3
+        damage -= target.REP*0.2
         self.HP += damage*0.5
         print(f'체력흡수를 당해 {damage}만큼 피해를 입었고,', f'그녀는 {damage*0.5}만큼 체력을 회복했다!')
         if target.HP <= 0:
@@ -1019,7 +1019,7 @@ def battle():
         Beelzebub("Beelzebub", 350, 70, 150, 80, 130, 0.1, '어? 나 아직 밥 안시켰는데'),
         Spider("Spider", 150, 130, 80, 100, 40, 0.1, '쉬이익! 쉬이익!'),
         AAS("Adam's Apple Snake", 180, 130, 50, 60, 80, 0.4, '사과 하나 먹을래?'),
-        LILITH("LILITH", 1000, 60, 250, 100, 120, 0.1,
+        LILITH("LILITH", 1000, 200, 300, 100, 120, 0.2,
                '최초의 여성, 아담의 첫 번째 부인, 성역의 어머니 LILITH가 모습을 드러냈다!\n"내 아이들아, 족쇄를 벗고... 죄악 속에서 아름답게 거듭나라..."')
     ]
 
@@ -1037,7 +1037,7 @@ def battle():
 
         if player.HP <= 0:
             print("YOU DIED")
-            print('리겜?')
+            print('리겜?', '하고싶으면 1번을 입력', sep='\n')
             if int(input()) == 1:
                 battle()
             else:
