@@ -434,6 +434,7 @@ class Monster:
 # Skeleton
         # 스켈레톤 평타
 
+
     def skeleton_attack(self, target):
         if random.random() < target.AGI:
             return
@@ -471,6 +472,7 @@ class Monster:
 # Giant Fly
         # 거대파리 평타
 
+
     def giantfly_attack(self, target):
         if random.random() < target.AGI:
             return
@@ -507,7 +509,6 @@ class Monster:
 # Beelzebub
         # 베엘제붑 평타
 
-
     def beelzebub_attack(self, target):
         if random.random() < target.AGI:
             return
@@ -541,7 +542,6 @@ class Monster:
 
 # Spider
         # 거미 평타
-
 
     def spider_attack(self, target):
         if random.random() < target.AGI:
@@ -581,7 +581,6 @@ class Monster:
 # Adam's Apple Snake
         # 뱀 평타
 
-
     def snakeattack(self, target):
         if random.random() < target.AGI:
             return
@@ -614,10 +613,9 @@ class Monster:
 # LILITH
         # 짓밟기
 
-
     def stompon(self, target):
         damage = self.ATK*0.3 + self.INT*1.5
-        damage -= target.REP, target.DEF
+        damage -= target.REP - target.DEF
         print(f'성역의 어머니에게 밟혀 {damage}만큼 피해를 입었다. 포상이다!')
         if target.HP <= 0:
             print(f'성역의 어머니에게 밟혀 {damage} 피해를 입고 영웅은 성불했다!', '마망!', sep='\n')
