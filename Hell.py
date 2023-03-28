@@ -1043,7 +1043,7 @@ def battle():
             else:
                 break
         else:
-            print(monster.name.upper(), 'GREAT ENEMY FELLED', '\n')
+            print(monster.name.upper(), '\n', 'GREAT ENEMY FELLED')
 
     if player.HP > 0:
         print("대충 세상을 구해서 잘했다는 내용의 아웃트로")
