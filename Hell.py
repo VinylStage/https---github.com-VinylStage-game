@@ -163,7 +163,7 @@ class Character:
             print('================================================================================================')
 
         # 기도
-    def pray(self):
+    def pray(self, target):
         effect = self.HP + self.FTH*0.3
         self.HP += effect
         self.BLF += effect*0.5
@@ -287,7 +287,7 @@ class Character:
             print('================================================================================================')
 
         # 회복
-    def healself(self):
+    def healself(self, target):
         self.HP += self.INT*0.3
         print(f'내 체력이 {self.INT*0.3}만큼 회복되었다.')
         self.MP -= 50
