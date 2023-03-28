@@ -23,10 +23,8 @@ class Character:
         self.RST = RST  # 기력재생력
         self.REM = REM  # 마나재생력
 
-
 # 소드마스터
         # 소마 평타
-
 
     def swordman_attack(self, target):
         if random.random() < self.AGI:
@@ -657,6 +655,24 @@ class Sword_Master(Character):
         self.skills = [self.swordman_attack,
                        self.whirlwind, self.tearoffhead, self.spirited]
 
+    def stats(self):
+        stat_list = [
+            f"체력: {self.HP}",
+            f"마나: {self.MP}",
+            f"기력: {self.ENG}",
+            f"믿음: {self.BLF}",
+            f"공격력: {self.ATK}",
+            f"지능: {self.INT}",
+            f"신앙력: {self.FTH}",
+            f"방어력: {self.DEF}",
+            f"마법저항력: {self.REP}",
+            f"민첩: {self.AGI}",
+            f"체력재생력: {self.VIT}",
+            f"기력재생력: {self.RST}",
+            f"마나재생력: {self.REM}"
+        ]
+        print(stat_list)
+
     def attack(self, target):
         while True:
             print("어떤 공격을 할까?")
@@ -1033,3 +1049,6 @@ def battle():
 
     if player.HP > 0:
         print("대충 세상을 구해서 잘했다는 내용의 아웃트로")
+
+
+battle()
