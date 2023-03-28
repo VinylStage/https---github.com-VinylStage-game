@@ -1,12 +1,8 @@
 import random
-
-print("대충 오프닝멘트")
-print("이름을 입력하세요")
-player_name = input()
-print(f'난세에 태어난 영웅, {player_name}은 대충 거시기 해서 거시기 한다.')
-
-
+import pprint
 # 캐릭터기본스탯
+
+
 class Character:
     def __init__(self, name, HP, MP, ENG, BLF, ATK, INT, FTH, DEF, REP, AGI, VIT, REM, RST):
         self.name = name
@@ -32,12 +28,15 @@ class Character:
         self.RST = RST  # 기력재생력
         self.REM = REM  # 마나재생력
 
+
 # 소드마스터
         # 소마 평타
+
+
     def swordman_attack(self, target):
         if random.random() < self.AGI:
             return
-        damage = self.ATK + self.INT + random.randint(-50, 100)  # 랜덤으로 치명타 적용
+        damage = self.ATK + random.randint(-50, 100)  # 랜덤으로 치명타 적용
         damage -= target.DEF  # 방어력으로 물리공격 상쇄
         if damage < 0:  # 뎀지가 0이 안될시에 공격이 안됨
             damage = 0
@@ -170,7 +169,7 @@ class Character:
             print(f'{target.name}, 선채로 사망..!')
 
         # 묻어버리기
-    def durt(self, target):
+    def dirtgrave(self, target):
         if random.random() < target.AGI:
             return
         damage = self.INT*0.8
@@ -181,6 +180,11 @@ class Character:
         print(f'{target.name}녀석 {damage}피해를 입고 겨우 흙더미에서 나왔다')
         if target.HP <= 0:
             print(f'{target.name}, 생 매 장 ~')
+
+        # 회복
+    def healself(self):
+        self.HP += self.INT*0.3
+        print(f'내 체력이 {self.INT*0.3}만큼 회복되었다.')
 
 # 인파이터
         # 인파 평타
@@ -398,3 +402,379 @@ class Monster:
         print(f'체력흡수를 당해 {damage}만큼 피해를 입었고,', f'그녀는 {damage*0.5}만큼 체력을 회복했다!')
         if target.HP <= 0:
             print(f'{target.name}녀석... 결국 모조리 흡수당하여 흔적조차 남지 않았다.')
+
+
+# 자식클래스
+# Sword Master Class
+class Sword_Master(Character):
+    def __init__(self, name, HP, MP, ENG, BLF, ATK, INT, FTH, DEF, REP, AGI, VIT, REM, RST):
+        super().__init__(name, HP, MP, ENG, BLF, ATK,
+                         INT, FTH, DEF, REP, AGI, VIT, REM, RST)
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+        self.VIT = VIT  # 체력재생력
+
+        HP = 500
+        ATK = 150
+        DEF = 80
+        REP = 60
+        AGI = 0.2
+        VIT = 10
+        self.skills = [self.swordman_attack,
+                       self.whirlwind, self.tearoffhead, self.spirited]
+
+    def attack(self, target):
+        print("Choose your skill:")
+        for i, skill in enumerate(self.skills):
+            print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
+        choice = int(input()) - 1  # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
+        selected_skill = self.skills[choice]  # 선택한 스킬의 함수 객체 가져오기
+        selected_skill(target)  # 선택한 스킬 사용하기
+
+# Holy Knight Class
+
+
+class Holy_Knight(Character):
+    def __init__(self, name, HP, MP, ENG, BLF, ATK, INT, FTH, DEF, REP, AGI, VIT, REM, RST):
+        super().__init__(name, HP, MP, ENG, BLF, ATK,
+                         INT, FTH, DEF, REP, AGI, VIT, REM, RST)
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+        self.max_BLF = BLF  # 최대믿음 /Holy Knight의 마나역할
+        self.BLF = BLF  # 믿음
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.FTH = FTH  # 신앙력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+        self.VIT = VIT  # 체력재생력
+
+        HP = 480
+        BLF = 200
+        ATK = 90
+        FTH = 50
+        DEF = 60
+        REP = 80
+        AGI = 0.1
+        VIT = 8
+        self.skills = [self.holy_attack,
+                       self.sacredfire, self.holyvolt, self.pray]
+
+    def attack(self, target):
+        print("Choose your skill:")
+        for i, skill in enumerate(self.skills):
+            print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
+        choice = int(input()) - 1  # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
+        selected_skill = self.skills[choice]  # 선택한 스킬의 함수 객체 가져오기
+        selected_skill(target)  # 선택한 스킬 사용하기
+
+# Sorceress Class
+
+
+class Sorceress(Character):
+    def __init__(self, name, HP, MP, ENG, BLF, ATK, INT, FTH, DEF, REP, AGI, VIT, REM, RST):
+        super().__init__(name, HP, MP, ENG, BLF, ATK,
+                         INT, FTH, DEF, REP, AGI, VIT, REM, RST)
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+        self.max_MP = MP  # 최대마나
+        self.MP = MP  # 마나
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.INT = INT  # 지능/주문력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+        self.VIT = VIT  # 체력재생력
+        self.REM = REM  # 마나재생력
+
+        HP = 350
+        MP = 300
+        ATK = 60
+        INT = 250
+        DEF = 80
+        REP = 60
+        AGI = 0.5
+        VIT = 10
+        REM = 15
+        self.skills = [self.sorceress_attack,
+                       self.fireinthehole, self.icebreath, self.dirtgrave, self.healself]
+
+    def attack(self, target):
+        print("Choose your skill:")
+        for i, skill in enumerate(self.skills):
+            print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
+        choice = int(input()) - 1  # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
+        selected_skill = self.skills[choice]  # 선택한 스킬의 함수 객체 가져오기
+        selected_skill(target)  # 선택한 스킬 사용하기
+
+# Infighter Class
+
+
+class Infighter(Character):
+    def __init__(self, name, HP, MP, ENG, BLF, ATK, INT, FTH, DEF, REP, AGI, VIT, REM, RST):
+        super().__init__(name, HP, MP, ENG, BLF, ATK,
+                         INT, FTH, DEF, REP, AGI, VIT, REM, RST)
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+        self.max_ENG = ENG  # 최대기력
+        self.ENG = ENG  # 기력
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+        self.VIT = VIT  # 체력재생력
+        self.RST = RST  # 기력재생력
+
+        HP = 650
+        ATK = 100
+        DEF = 90
+        REP = 90
+        AGI = 0.7
+        VIT = 30
+        self.skills = [self.infighter_attack,
+                       self.sincerepunch, self.whirlkick, self.overthrow]
+
+    def attack(self, target):
+        print("Choose your skill:")
+        for i, skill in enumerate(self.skills):
+            print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
+        choice = int(input()) - 1  # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
+        selected_skill = self.skills[choice]  # 선택한 스킬의 함수 객체 가져오기
+        selected_skill(target)  # 선택한 스킬 사용하기
+
+# 몬스터 클래스
+
+# Skeleton Class
+
+
+class Sekelton(Monster):
+    def __init__(self, name, HP, ATK, INT, DEF, REP, AGI):
+        super().__init__(name, HP, ATK, INT, DEF, REP, AGI)
+        self.name = name
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+
+        HP = 250
+        ATK = 100
+        DEF = 50
+        REP = 100
+        AGI = 0.5
+        self.skills = [self.skeleton_attack, self.arrow]
+
+    def attack(self, target):
+        for _ in range(3):
+            self.skeleton_attack(target)
+        self.arrow(target)
+
+# Giant Fly
+
+
+class Giant_Fly(Monster):
+    def __init__(self, name, HP, ATK, INT, DEF, REP, AGI):
+        super().__init__(name, HP, ATK, INT, DEF, REP, AGI)
+        self.name = name
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+
+        HP = 200
+        ATK = 70
+        DEF = 60
+        REP = 120
+        AGI = 0.8
+        self.skills = [self.giantfly_attack, self.headattack]
+
+    def attack(self, target):
+        for _ in range(3):
+            self.giantfly_attack(target)
+        self.headattack(target)
+
+# Beelzebub
+
+
+class Beelzebub(Monster):
+    def __init__(self, name, HP, ATK, INT, DEF, REP, AGI):
+        super().__init__(name, HP, ATK, INT, DEF, REP, AGI)
+        self.name = name
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.INT = INT  # 지능/주문력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+
+        HP = 350
+        ATK = 70
+        INT = 150
+        DEF = 80
+        REP = 130
+        AGI = 0.1
+        self.skills = [self.beelzebub_attack, self.bugsattack]
+
+    def attack(self, target):
+        for _ in range(3):
+            self.beelzebub_attack(target)
+        self.bugsattack(target)
+
+# Spider
+
+
+class Spider(Monster):
+    def __init__(self, name, HP, ATK, INT, DEF, REP, AGI):
+        super().__init__(name, HP, ATK, INT, DEF, REP, AGI)
+        self.name = name
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.INT = INT  # 지능/주문력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+
+        HP = 150
+        ATK = 130
+        INT = 80
+        DEF = 100
+        REP = 40
+        AGI = 0.3
+        self.skills = [self.spider_attack, self.webattack]
+
+    def attack(self, target):
+        for _ in range(2):
+            self.spider_attack(target)
+        self.webattack(target)
+
+# Adam's Apple Snake
+
+
+class AAS(Monster):
+    def __init__(self, name, HP, ATK, INT, DEF, REP, AGI):
+        super().__init__(name, HP, ATK, INT, DEF, REP, AGI)
+        self.name = name
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.INT = INT  # 지능/주문력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+
+        HP = 180
+        ATK = 130
+        INT = 50
+        DEF = 60
+        REP = 80
+        AGI = 0.8
+        self.skills = [self.snakeattack, self.spitting]
+
+    def attack(self, target):
+        for _ in range(3):
+            self.snakeattack(target)
+        self.spitting(target)
+
+# LILITH
+
+
+class LILITH(Monster):
+    def __init__(self, name, HP, ATK, INT, DEF, REP, AGI):
+        super().__init__(name, HP, ATK, INT, DEF, REP, AGI)
+        self.name = name
+
+        # 소모용
+        self.max_HP = HP  # 최대체력
+        self.HP = HP  # 체력
+
+        # 고정스탯
+        self.ATK = ATK  # 공격력
+        self.INT = INT  # 지능/주문력
+        self.DEF = DEF  # 방어력
+        self.REP = REP  # 마법저항력
+        self.AGI = AGI  # 민첩/회피율
+
+        HP = 1000
+        ATK = 60
+        INT = 250
+        DEF = 100
+        REP = 120
+        AGI = 0.1
+        self.skills = [self.stompon, self.lifeabsorption]
+
+    def attack(self, target):
+        for _ in range(5):
+            self.stompon(target)
+        self.lifeabsorption(target)
+
+
+def battle(player, enemy):
+    classes = {
+        1: Sword_Master,
+        2: Holy_Knight,
+        3: Sorceress,
+        4: Infighter
+    }
+    print("대충 오프닝멘트")
+    print("이름을 입력하세요")
+    player_name = input()
+    print(f'난세에 태어난 영웅, {player_name}은 대충 거시기 해서 거시기 한다.')
+    print('영웅을 선택하시오')
+
+    if input() in classes.keys():
+        selected_class = classes[int(input())]
+        player = selected_class
+        print(f'{player}영웅을 선택하였습니다.')
+    else:
+        print("잘못된 선택입니다.")
+
+    # 첫몬스터 만나는 얘기
+    # 전투장면, 스킬선택
+    # 죽으면 나오는멘트
+    # 클리어시 멘트
+    # 다음몬스터
