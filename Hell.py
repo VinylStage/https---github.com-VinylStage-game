@@ -1,7 +1,9 @@
 import random
-
+import os
 
 # 캐릭터기본스탯
+
+
 class Character:
     def __init__(self, name, HP, MP, ENG, BLF, ATK, INT, FTH, DEF, REP, AGI, VIT, REM, RST):
         self.name = name
@@ -27,6 +29,7 @@ class Character:
         # 소마 평타
 
     def swordman_attack(self, target):
+        os.system('cls')
         if random.random() < self.AGI:
             return
         damage = self.ATK + random.randint(-50, 100)  # 랜덤으로 치명타 적용
@@ -42,11 +45,11 @@ class Character:
             print(f'{target.name}녀석 {damage}맞고 죽음')
             self.HP += self.VIT*0.2
             print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
-            print('================================================================================================')
 
     # 소용돌이
 
     def whirlwind(self, target):
+        os.system('cls')
         if random.random() < target.AGI:
             return
         damage = self.ATK*0.8
@@ -62,10 +65,11 @@ class Character:
             print(f'{target.name}, 소용돌이로 가루가 되었다.')
             self.HP += self.VIT*0.2
             print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
-            print('================================================================================================')
 
     # 머리찢기
+
     def tearoffhead(self, target):
+        os.system('cls')
         if random.random() < target.AGI:
             return
         damage = self.ATK*1.2
@@ -81,10 +85,11 @@ class Character:
             print(f'{target.name}의 머리가 사라졌다!')
             self.HP += self.VIT*0.2
             print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
-            print('================================================================================================')
 
     # 기합
+
     def spirited(self, target):
+        os.system('cls')
         target.DEF -= 20
         self.DEF += 30
         self.HP += 50
@@ -96,11 +101,14 @@ class Character:
             print(f'{target.name}이(가) 겁에질려 그대로 쓰러졌다!')
             self.HP += self.VIT*0.2
             print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
-            print('================================================================================================')
+
 
 # 성기사
         # 성기사 평타
+
+
     def holy_attack(self, target):
+        os.system('cls')
         if random.random() < target.AGI:
             return
         damage = self.ATK + self.FTH*0.2 + \
@@ -117,10 +125,14 @@ class Character:
             print(f'{target.name}이 성스러워졌다!')
             self.HP += self.VIT*0.2
             print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
-            print('================================================================================================')
 
         # 신성한불꽃
+
     def sacredfire(self, target):
+        os.system('cls')
+        if self.BLF <= 0:
+            print('믿음이 부족하여 일반공격으로 대체합니다')
+            return
         if random.random() < target.AGI:
             return
         damage = self.FTH*0.7
@@ -129,20 +141,24 @@ class Character:
             print(f'{target.name} : 오소이')
         target.HP -= damage
         print(f'대충{target.name}에게 {damage}만큼 뜨끈뜨끈해졌다!')
-        self.BLF -= 10
-        print(f'스킬사용으로 믿음이 10 소모 : {self.BLF}')
+        self.BLF -= 30
+        print(f'스킬사용으로 믿음이 30 소모 : {self.BLF}')
         self.HP += self.VIT
         print(f'{self.name}은(는) {self.VIT}만큼 체력을 회복했다.')
         if target.HP <= 0:
             print(f'{target.name}, 귀중한 단백질원이 되었다')
-            self.BLF -= 10
-            print(f'스킬사용으로 믿음이 10 소모 : {self.BLF}')
+            self.BLF -= 30
+            print(f'스킬사용으로 믿음이 30 소모, 남은 믿음 : {self.BLF}')
             self.HP += self.VIT*0.2
             print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
-            print('================================================================================================')
 
         # 신성한 빛줄기
+
     def holyvolt(self, target):
+        os.system('cls')
+        if self.BLF <= 0:
+            print('믿음이 부족하여 일반공격으로 대체합니다')
+            return
         if random.random() < target.AGI:
             return
         damage = self.FTH
@@ -153,28 +169,35 @@ class Character:
         target.HP -= damage
         print(f'{target.name}에게 {damage}빛을 보게했다!')
         self.BLF -= 30
-        print(f'스킬사용으로 믿음이 10 소모 : {self.BLF}')
+        print(f'스킬사용으로 믿음이 10 소모, 남은 믿음 : {self.BLF}')
         self.HP += self.VIT
         print(f'{self.name}은(는) {self.VIT}만큼 체력을 회복했다.')
         if target.HP <= 0:
             print(f'{target.name}아 제발 밖에좀 나가서', '\n', '햇빛도 좀 보고 잔디도 만지고 좀 그래!')
             self.HP += self.VIT*0.2
             print(f'{self.name}은(는) {self.VIT*0.2}만큼 체력을 회복했다.')
-            print('================================================================================================')
 
         # 기도
+
     def pray(self, target):
+        os.system('cls')
+        if self.BLF <= 0:
+            print('믿음이 부족하여 일반공격으로 대체합니다')
+            return
         effect = self.FTH*0.3
         self.HP += effect
         self.BLF += effect*0.5
         print(f'체력을 {effect}만큼 회복하고 믿음을 {effect*0.5}만큼 회복했다!')
         self.HP += self.VIT
         print(f'{self.name}은(는) {self.VIT}만큼 체력을 회복했다.')
-        print('================================================================================================')
+
 
 # 원소술사
         # 원소술사 평타
+
+
     def sorceress_attack(self, target):
+        os.system('cls')
         if random.random() < target.AGI:
             return
         damage = self.ATK + self.INT*0.1 + \
@@ -197,10 +220,14 @@ class Character:
             self.MP += self.REM*1.5
             print(f'{self.name}은(는) {self.REM*1.5}만큼 마나를 회복했다.',
                   f'현재마나 : {self.MP}', sep='\n')
-            print('================================================================================================')
 
         # 구멍속불
+
     def fireinthehole(self, target):
+        os.system('cls')
+        if self.MP <= 0:
+            print('마나가 부족하여 하찮은 일반공격으로 대체합니다')
+            return
         if random.random() < target.AGI:
             return
         damage = self.INT*0.6
@@ -226,10 +253,14 @@ class Character:
             self.MP += self.REM
             print(f'{self.name}은(는) {self.REM*1.5}만큼 마나를 회복했다.',
                   f'현재마나 : {self.MP}', sep='\n')
-            print('================================================================================================')
 
         # 얼음숨결
+
     def icebreath(self, target):
+        os.system('cls')
+        if self.MP <= 0:
+            print('마나가 부족하여 하찮은 일반공격으로 대체합니다')
+            return
         if random.random() < target.AGI:
             return
         damage = self.INT*0.5
@@ -255,10 +286,14 @@ class Character:
             self.MP += self.REM
             print(f'{self.name}은(는) {self.REM*1.5}만큼 마나를 회복했다.',
                   f'현재마나 : {self.MP}', sep='\n')
-            print('================================================================================================')
 
         # 묻어버리기
+
     def dirtgrave(self, target):
+        os.system('cls')
+        if self.MP <= 0:
+            print('마나가 부족하여 하찮은 일반공격으로 대체합니다')
+            return
         if random.random() < target.AGI:
             return
         damage = self.INT*0.8
@@ -284,10 +319,14 @@ class Character:
             self.MP += self.REM
             print(f'{self.name}은(는) {self.REM*1.5}만큼 마나를 회복했다.',
                   f'현재마나 : {self.MP}', sep='\n')
-            print('================================================================================================')
 
         # 회복
+
     def healself(self, target):
+        os.system('cls')
+        if self.MP <= 0:
+            print('마나가 부족하여 하찮은 일반공격으로 대체합니다')
+            return
         self.HP += self.INT*0.3
         print(f'내 체력이 {self.INT*0.3}만큼 회복되었다.')
         self.MP -= 50
@@ -297,11 +336,14 @@ class Character:
         self.MP += self.REM
         print(f'{self.name}은(는) {self.REM}만큼 마나를 회복했다.',
               f'현재마나 : {self.MP}', sep='\n')
-        print('================================================================================================')
+
 
 # 인파이터
         # 인파 평타
+
+
     def infighter_attack(self, target):
+        os.system('cls')
         if random.random() < target.AGI:
             return
         damage = self.ATK + random.randint(-50, 200)  # 랜덤으로 치명타 적용
@@ -323,10 +365,14 @@ class Character:
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}', sep='\n')
-            print('================================================================================================')
 
         # 진심펀치
+
     def sincerepunch(self, target):
+        os.system('cls')
+        if self.ENG <= 0:
+            print('기력 부족하여 하찮은 일반공격으로 대체합니다')
+            return
         if random.random() < target.AGI:
             return
         damage = self.ATK*0.7
@@ -350,7 +396,7 @@ class Character:
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}')
-            print('================================================================================================')
+
         elif target.HP <= 0:
             print(f'{target.name}, DOWN! {target.name}, DOWN!')
             self.HP += self.VIT*0.2
@@ -358,10 +404,14 @@ class Character:
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}', sep='\n')
-            print('================================================================================================')
 
         # 회전차기
+
     def whirlkick(self, target):
+        os.system('cls')
+        if self.ENG <= 0:
+            print('기력 부족하여 하찮은 일반공격으로 대체합니다')
+            return
         if random.random() < target.AGI:
             return
         damage = self.ATK*1.2
@@ -385,10 +435,14 @@ class Character:
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}', sep='\n')
-            print('================================================================================================')
 
         # 엎어치기
+
     def overthrow(self, target):
+        os.system('cls')
+        if self.ENG <= 0:
+            print('기력 부족하여 하찮은 일반공격으로 대체합니다')
+            return
         damage = self.ATK*1.8
         damage -= target.DEF*0.2  # 방어력으로 물리공격 상쇄
         self.ENG -= 60
@@ -410,7 +464,6 @@ class Character:
             self.ENG += self.RST*1.5
             print(f'{self.name}은(는) {self.RST*1.5}만큼 기력을 회복했다.',
                   f'현재 기력: {self.ENG}', sep='\n')
-            print('================================================================================================')
 
 
 # 몬스터 기본스탯
@@ -448,9 +501,9 @@ class Monster:
         if target.HP <= 0:
             print(f'Skeleton의 일반공격으로 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('아이고 이렇게 가면 이 세계는 누가지키나...')
-            print('================================================================================================')
 
         # 화살
+
     def arrow(self, target):
         if random.random() < target.AGI:
             return
@@ -466,7 +519,6 @@ class Monster:
         if target.HP <= 0:
             print(f'Skeleton의 화살로 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('아이고 이렇게 가면 이 세계는 누가지키나...')
-            print('================================================================================================')
 
 
 # Giant Fly
@@ -486,7 +538,6 @@ class Monster:
         if target.HP <= 0:
             print(f'거대파리의 싸대기로 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('아이고 이렇게 가면 이 세계는 누가지키나...')
-            print('================================================================================================')
 
         # 박치기
 
@@ -503,7 +554,6 @@ class Monster:
         if target.HP <= 0:
             print(f'거대파리의 박치기 공격으로 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('아이고 이렇게 가면 이 세계는 누가지키나...')
-            print('================================================================================================')
 
 
 # Beelzebub
@@ -522,7 +572,6 @@ class Monster:
         if target.HP <= 0:
             print(f'베엘제붑의 지건으로 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('아이고 이렇게 가면 이 세계는 누가지키나...')
-            print('================================================================================================')
 
         # 벌레공격
 
@@ -537,7 +586,6 @@ class Monster:
         if target.HP <= 0:
             print(f'베엘제붑의 벌레공격으로 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('코이츠 구더기밥이 되어버린 wwww')
-            print('================================================================================================')
 
 
 # Spider
@@ -556,7 +604,6 @@ class Monster:
         if target.HP <= 0:
             print(f'거미에게 물려 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('아이고 이렇게 가면 이 세계는 누가지키나...')
-            print('================================================================================================')
 
         # 거미줄 공격
 
@@ -575,7 +622,6 @@ class Monster:
         if target.HP <= 0:
             print(f'거미줄 공격으로 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('아이고 이렇게 가면 이 세계는 누가지키나...')
-            print('================================================================================================')
 
 
 # Adam's Apple Snake
@@ -594,7 +640,6 @@ class Monster:
         if target.HP <= 0:
             print(f'뱀한테 뺨맞고 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print('아이고 이렇게 가면 이 세계는 누가지키나...')
-            print('================================================================================================')
 
         # 침뱉기
 
@@ -607,7 +652,6 @@ class Monster:
         if target.HP <= 0:
             print(f'선악과뱀에게 침을 맞고 {damage} 피해를 입고 영웅은 쓰러졌다!')
             print(f'{target.name}, 이 곳에 침맞고 잠들다')
-            print('================================================================================================')
 
 
 # LILITH
@@ -620,9 +664,9 @@ class Monster:
         if target.HP <= 0:
             print(f'성역의 어머니에게 밟혀 {damage} 피해를 입고 영웅은 성불했다!', '마망!', sep='\n')
             print('성역의 어머니 LILITH, 이제 그녀를 막을 자는 아무도 없다!')
-            print('================================================================================================')
 
         # 흡혈
+
     def lifeabsorption(self, target):
         damage = self.INT*3
         damage -= target.REP*0.2
@@ -630,7 +674,6 @@ class Monster:
         print(f'체력흡수를 당해 {damage}만큼 피해를 입었고,', f'그녀는 {damage*0.5}만큼 체력을 회복했다!')
         if target.HP <= 0:
             print(f'{target.name}녀석... {damage} 피해를 입고 결국 모조리 흡수당하여 흔적조차 남지 않았어')
-            print('================================================================================================')
 
 
 # 자식클래스
@@ -652,24 +695,6 @@ class Sword_Master(Character):
 
         self.skills = [self.swordman_attack,
                        self.whirlwind, self.tearoffhead, self.spirited]
-
-    def stats(self):
-        stat_list = [
-            f"체력: {self.HP}",
-            f"마나: {self.MP}",
-            f"기력: {self.ENG}",
-            f"믿음: {self.BLF}",
-            f"공격력: {self.ATK}",
-            f"지능: {self.INT}",
-            f"신앙력: {self.FTH}",
-            f"방어력: {self.DEF}",
-            f"마법저항력: {self.REP}",
-            f"민첩: {self.AGI}",
-            f"체력재생력: {self.VIT}",
-            f"기력재생력: {self.RST}",
-            f"마나재생력: {self.REM}"
-        ]
-        print(stat_list)
 
     def attack(self, target):
         while True:
@@ -996,7 +1021,7 @@ def battle():
                               0, 100, 80, 0.1, 10, 0, 0)
         print(player.name, ': 눈도 깜짝 안한다!')
     elif character_choice == 2:
-        player = Holy_Knight(name, 480, 0, 0, 200, 90,
+        player = Holy_Knight(name, 480, 0, 0, 0, 90,
                              0, 80, 150, 80, 0.1, 8, 0, 0)
         print(player.name, ': Firs mother is coming')
     elif character_choice == 3:
@@ -1034,7 +1059,6 @@ def battle():
             player.attack(monster)
             if monster.HP > 0:
                 monster.attack(player)
-
         if player.HP <= 0:
             print("YOU DIED")
             print('리겜?', '하고싶으면 1번을 입력', sep='\n')
@@ -1043,8 +1067,9 @@ def battle():
             else:
                 break
         else:
-            print(monster.name.upper(), '\n', 'GREAT ENEMY FELLED')
-
+            os.system('cls')
+            print(monster.name.upper(), '\n''GREAT ENEMY FELLED')
+            print('================================================================================================''\n')
     if player.HP > 0:
         print("대충 세상을 구해서 잘했다는 내용의 아웃트로")
 
