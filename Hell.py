@@ -25,6 +25,26 @@ class Character:
         self.rst = rst  # 기력재생력
         self.rem = rem  # 마나재생력
 
+        self.skills = []
+
+    def attack(self, target):
+        while True:
+            print("어떤 공격을 할까?")
+            for i, skill in enumerate(self.skills):
+                print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
+            try:
+                # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
+                choice = int(input()) - 1
+                if 0 <= choice < len(self.skills):
+                    # 선택한 스킬의 함수 객체 가져오기
+                    selected_skill = self.skills[choice]
+                    selected_skill(target)  # 선택한 스킬 사용하기
+                    break  # 올바른 스킬을 선택했으므로 루프를 빠져나감
+                else:
+                    print("얘! 숫자 읽을줄 모르니?")
+            except ValueError:
+                print("오타 검지검지~")
+
 # 소드마스터
         # 소마 평타
 
@@ -479,7 +499,16 @@ class Monster:
         self.rep = rep  # 마법저항력
         self.agi = agi  # 민첩/회피율
         self.intro = intro
+        self.skills = []
+        self.attack_count = 0
 
+    def attack(self, target):
+        if self.attack_count < 3:
+            self.skills[0](target)
+            self.attack_count += 1
+        else:
+            self.skills[1](target)
+            self.attack_count = 0
 
 # Skeleton
         # 스켈레톤 평타
@@ -695,23 +724,7 @@ class Sword_Master(Character):
         self.skills = [self.swordman_attack,
                        self.whirlwind, self.tearoffhead, self.spirited]
 
-    def attack(self, target):
-        while True:
-            print("어떤 공격을 할까?")
-            for i, skill in enumerate(self.skills):
-                print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
-            try:
-                choice = int(input()) - 1  # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
-                if 0 <= choice < len(self.skills):
-                    selected_skill = self.skills[choice]  # 선택한 스킬의 함수 객체 가져오기
-                    selected_skill(target)  # 선택한 스킬 사용하기
-                    break  # 올바른 스킬을 선택했으므로 루프를 빠져나감
-                else:
-                    print("얘! 숫자 읽을줄 모르니?")
-            except ValueError:
-                print("오타 검지검지~")
-
-# Holy Knight Class
+# Holy Knight Clas]
 
 
 class Holy_Knight(Character):
@@ -734,21 +747,6 @@ class Holy_Knight(Character):
         self.skills = [self.holy_attack,
                        self.sacredfire, self.holyvolt, self.pray]
 
-    def attack(self, target):
-        while True:
-            print("어떤 공격을 할까?")
-            for i, skill in enumerate(self.skills):
-                print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
-            try:
-                choice = int(input()) - 1  # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
-                if 0 <= choice < len(self.skills):
-                    selected_skill = self.skills[choice]  # 선택한 스킬의 함수 객체 가져오기
-                    selected_skill(target)  # 선택한 스킬 사용하기
-                    break  # 올바른 스킬을 선택했으므로 루프를 빠져나감
-                else:
-                    print("얘! 숫자 읽을줄 모르니?")
-            except ValueError:
-                print("오타 검지검지~")
 
 # Sorceress Class
 
@@ -774,22 +772,6 @@ class Sorceress(Character):
         self.skills = [self.sorceress_attack,
                        self.fireinthehole, self.icebreath, self.dirtgrave, self.healself]
 
-    def attack(self, target):
-        while True:
-            print("어떤 공격을 할까?")
-            for i, skill in enumerate(self.skills):
-                print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
-            try:
-                choice = int(input()) - 1  # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
-                if 0 <= choice < len(self.skills):
-                    selected_skill = self.skills[choice]  # 선택한 스킬의 함수 객체 가져오기
-                    selected_skill(target)  # 선택한 스킬 사용하기
-                    break  # 올바른 스킬을 선택했으므로 루프를 빠져나감
-                else:
-                    print("얘! 숫자 읽을줄 모르니?")
-            except ValueError:
-                print("오타 검지검지~")
-
 # Infighter Class
 
 
@@ -813,21 +795,6 @@ class Infighter(Character):
         self.skills = [self.infighter_attack,
                        self.sincerepunch, self.whirlkick, self.overthrow]
 
-    def attack(self, target):
-        while True:
-            print("어떤 공격을 할까?")
-            for i, skill in enumerate(self.skills):
-                print(f"{i+1}: {skill.__name__}")  # 스킬 번호와 이름 출력
-            try:
-                choice = int(input()) - 1  # 스킬 번호 입력 받기 (인덱스는 0부터 시작하므로 1을 뺌)
-                if 0 <= choice < len(self.skills):
-                    selected_skill = self.skills[choice]  # 선택한 스킬의 함수 객체 가져오기
-                    selected_skill(target)  # 선택한 스킬 사용하기
-                    break  # 올바른 스킬을 선택했으므로 루프를 빠져나감
-                else:
-                    print("얘! 숫자 읽을줄 모르니?")
-            except ValueError:
-                print("오타 검지검지~")
 
 # 몬스터 클래스
 
@@ -850,15 +817,7 @@ class Skeleton(Monster):
         self.intro = intro  # 시작멘트
 
         self.skills = [self.skeleton_attack, self.arrow]
-        self.attack_count = 0
 
-    def attack(self, target):
-        if self.attack_count < 3:
-            self.skeleton_attack(target)
-            self.attack_count += 1
-        else:
-            self.arrow(target)
-            self.attack_count = 0
 
 # Giant Fly
 
@@ -879,15 +838,8 @@ class Giant_Fly(Monster):
         self.intro = intro  # 시작멘트
 
         self.skills = [self.giantfly_attack, self.headattack]
-        self.attack_count = 0
 
-    def attack(self, target):
-        if self.attack_count < 3:
-            self.giantfly_attack(target)
-            self.attack_count += 1
-        else:
-            self.headattack(target)
-            self.attack_count = 0
+
 # Beelzebub
 
 
@@ -908,15 +860,7 @@ class Beelzebub(Monster):
         self.intro = intro  # 시작멘트
 
         self.skills = [self.beelzebub_attack, self.bugsattack]
-        self.attack_count = 0
 
-    def attack(self, target):
-        if self.attack_count < 3:
-            self.beelzebub_attack(target)
-            self.attack_count += 1
-        else:
-            self.bugsattack(target)
-            self.attack_count = 0
 # Spider
 
 
@@ -937,15 +881,7 @@ class Spider(Monster):
         self.intro = intro  # 시작멘트
 
         self.skills = [self.spider_attack, self.webattack]
-        self.attack_count = 0
 
-    def attack(self, target):
-        if self.attack_count < 3:
-            self.spider_attack(target)
-            self.attack_count += 1
-        else:
-            self.webattack(target)
-            self.attack_count = 0
 
 # Adam's Apple Snake
 
@@ -967,15 +903,8 @@ class AAS(Monster):
         self.intro = intro  # 시작멘트
 
         self.skills = [self.snakeattack, self.spitting]
-        self.attack_count = 0
 
-    def attack(self, target):
-        if self.attack_count < 3:
-            self.snakeattack(target)
-            self.attack_count += 1
-        else:
-            self.spitting(target)
-            self.attack_count = 0
+
 # LILITH
 
 
@@ -996,15 +925,6 @@ class LILITH(Monster):
         self.intro = intro  # 시작멘트
 
         self.skills = [self.stompon, self.lifeabsorption]
-        self.attack_count = 0
-
-    def attack(self, target):
-        if self.attack_count < 5:
-            self.stompon(target)
-            self.attack_count += 1
-        else:
-            self.lifeabsorption(target)
-            self.attack_count = 0
 
 
 def battle():
@@ -1014,6 +934,9 @@ def battle():
     print("무엇으로 살아가는가 (1: Sword Master, 2: Holy Knight, 3: Sorceress, 4: Infighter):")
     character_choice = int(input())
 
+    # character_list = [
+
+    # ]
 # (name, hp, mp, eng, blf, atk, int_, fth, def_, rep, agi, vit, rem, rst)
     if character_choice == 1:
         player = Sword_Master(name, 500, 0, 0, 0, 150, 0,
@@ -1038,7 +961,7 @@ def battle():
     # 몬스터 생성
 # (name, hp, atk, int_, def_, rep, agi, intro)
     monsters = [
-        Skeleton("Skeleton", 250, 100, 0, 50, 100, 0.1, '달그락달그락'),
+        Skeleton("Skeleton", 5000, 100, 0, 50, 100, 0.1, '달그락달그락'),
         Giant_Fly("Giant Fly", 130, 70, 0, 60, 120, 0.3, '에ㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔㅔ엥'),
         Beelzebub("Beelzebub", 350, 70, 150, 80, 130, 0.1, '어? 나 아직 밥 안시켰는데'),
         Spider("Spider", 150, 130, 80, 100, 40, 0.1, '쉬이익! 쉬이익!'),
